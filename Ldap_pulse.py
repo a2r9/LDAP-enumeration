@@ -55,7 +55,7 @@ class LDAPHunter:
         self.config = config
         self.conn = None
         
-        # Making the search base dynamic for any domain length (e.g. corp.lab.local)
+        # Making the search base dynamic for any domain length
         self.search_base = ','.join([f"dc={part}" for part in self.config['domain'].split('.')])
 
     def connect(self):
@@ -109,7 +109,7 @@ class LDAPHunter:
                     self.trigger_exploit(user, extracted_pass)
         
         if hits == 0:
-            print("[-] No cleartext credentials found this time.")
+            print("[-] No cleartext creds found this time.")
 
     def trigger_exploit(self, user, password):
         choice = input(f"    [?] LAUNCH ATTACK on {user}? (y/n): ")
